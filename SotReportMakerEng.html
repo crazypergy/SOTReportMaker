@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report Input</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Daily Report Input</h1>
+
+        <form id="reportForm">
+            <div class="form-group">
+                <label for="sales">Sales</label>
+                <textarea id="sales" name="sales" class="form-control" rows="3" placeholder="Enter sales data here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="shiftSchedule">Shift Schedule for Tomorrow</label>
+                <textarea id="shiftSchedule" name="shiftSchedule" class="form-control" rows="3" placeholder="Enter shift schedule here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="completedTasksDate">Completed Tasks Date</label>
+                <input type="date" id="completedTasksDate" name="completedTasksDate" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="completedTasks">Completed Tasks</label>
+                <textarea id="completedTasks" name="completedTasks" class="form-control" rows="3" placeholder="Enter completed tasks here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tasksForTomorrowDate">Tasks for Date</label>
+                <input type="date" id="tasksForTomorrowDate" name="tasksForTomorrowDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="tasksForTomorrow">Tasks</label>
+                <textarea id="tasksForTomorrow" name="tasksForTomorrow" class="form-control" rows="3" placeholder="Enter tasks for tomorrow here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="lossReport">Loss Report</label>
+                <textarea id="lossReport" name="lossReport" class="form-control" rows="3" placeholder="Enter loss report here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="announcements">Announcements</label>
+                <textarea id="announcements" name="announcements" class="form-control" rows="3" placeholder="Enter announcements here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="customerFeedback">Customer Feedback & Observations</label>
+                <textarea id="customerFeedback" name="customerFeedback" class="form-control" rows="3" placeholder="Enter customer feedback here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="ordersDate">Orders for Date</label>
+                <input type="date" id="ordersDate" name="ordersDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="orders">Orders</label>
+                <textarea id="orders" name="orders" class="form-control" rows="3" placeholder="Enter orders here..."></textarea>
+            </div>
+
+            <!-- Button to generate the report in a new window -->
+            <button type="button" onclick="submitForm()" class="btn btn-primary btn-block">Generate Report</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #343a40;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    font-weight: bold;
+}
