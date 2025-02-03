@@ -1,3 +1,20 @@
+//Language Selection
+document.addEventListener("DOMContentLoaded", function(){
+    //Hide main form until language is selected
+    document.getElementById("reportForm").style.display = "none";
+});
+
+function setLanguage(lang){
+    localStorage.setItem("selectedLang", lang); //store choice
+    document.getElementById("languageSelection").style.display = "none";
+    document.getElementById("reportForm").style.display = "block";
+
+    if (lang === "ja") {
+        //Translate UI to Japanese
+        document.getElementById("sales").innerText = "売上";
+    }
+}
+
 // Automatically set the current date for Completed Tasks Date
 document.addEventListener("DOMContentLoaded", function() {
     const today = new Date().toISOString().split("T")[0];

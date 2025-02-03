@@ -9,12 +9,21 @@
 </head>
 <body class="bg-light">
 
+     <!-- Language Selection -->
+     <div id="languageSelection" class="container mt-5 text-center">
+        <h2>Select Language</h2>
+        <select id="languageDropdown" class="form-control w-50 mx-auto" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+        </select>
+    </div>
+
     <div class="container mt-5">
         <h1 class="text-center mb-4">Daily Report Input</h1>
 
         <form id="reportForm">
             <div class="form-group">
-                <label for="sales">Sales</label>
+                <id="salesLabel" label for="sales">Sales</label>
                 <textarea id="sales" name="sales" class="form-control" rows="3" placeholder="Enter sales data here..."></textarea>
             </div>
 
