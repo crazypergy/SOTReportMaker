@@ -11,7 +11,31 @@ function setLanguage(lang){
 
     if (lang === "ja") {
         //Translate UI to Japanese
-        document.getElementById("sales").innerText = "売上";
+        document.getElementById("salesLabel").innerText = "売上"; // Sales  
+        document.getElementById("sales").innerText = "ここに売上データを入力してください"; //text box
+        document.getElementById("shiftScheduleLabel").innerText = "明日のシフト"; // Shift Schedule for Tomorrow  
+        document.getElementById("completedTasksDateLabel").innerText = "完了した作業の日付"; // Completed Tasks Date  
+        document.getElementById("completedTasksLabel").innerText = "完了した作業"; // Completed Tasks
+        document.getElementById("tasksForDateLabel").innerText = "明日の作業"; // Tasks for Tomorrow Date  
+        document.getElementById("tasksForTomorrowLabel").innerText = "明日の作業"; // Tasks for Tomorrow  
+        document.getElementById("lossReportLabel").innerText = "損失報告"; // Loss Report  
+        document.getElementById("announcementsLabel").innerText = "お知らせ"; // Announcements  
+        document.getElementById("customerFeedbackLabel").innerText = "顧客のフィードバックと観察"; // Customer Feedback & Observations  
+        document.getElementById("ordersLabel").innerText = "注文"; // Orders  
+        document.getElementById("ordersDateLabel").innerText = "注文の日付"; // Orders for Date
+
+        // Update Input Placeholders or InnerText
+        document.getElementById("sales").placeholder = "ここに売上データを入力してください";  
+        document.getElementById("shiftSchedule").placeholder = "ここに明日のシフトを入力してください";  
+        document.getElementById("completedTasksDate").innerText = "完了した作業の日付";  
+        document.getElementById("completedTasks").placeholder = "ここに完了した作業を入力してください";  
+        document.getElementById("tasksForTomorrowDate").innerText = "明日の作業の日付";  
+        document.getElementById("tasksForTomorrow").placeholder = "ここに明日の作業を入力してください";  
+        document.getElementById("lossReport").placeholder = "ここに損失報告を入力してください";  
+        document.getElementById("announcements").placeholder = "ここにお知らせを入力してください";  
+        document.getElementById("customerFeedback").placeholder = "ここに顧客のフィードバックを入力してください";  
+        document.getElementById("ordersDate").innerText = "注文の日付";  
+        document.getElementById("orders").placeholder = "ここに注文を入力してください";  
     }
 }
 
@@ -19,6 +43,14 @@ function setLanguage(lang){
 document.addEventListener("DOMContentLoaded", function() {
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("completedTasksDate").value = today;
+});
+
+//Automatically set tomorrow's date for Tasks for Tomorrow
+document.addEventListener("DOMContentLoaded", function(){
+    const today = new Date();
+    today.setDate(today.getDate() + 1); //Move to the next day
+    const tomorrow = today.toISOString().split("T")[0]; //Format as YYY-MM-DD
+    document.getElementById("tasksForTomorrowDate").value = tomorrow;
 });
 
 function submitForm() {
