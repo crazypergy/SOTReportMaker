@@ -1,26 +1,40 @@
-// Automatically set the current date for Completed Tasks Date
+// script.js - Updated with date pre-filling, empty field handling, and LINE-optimized clipboard copy
 document.addEventListener("DOMContentLoaded", function() {
+    // Set today's date for Completed Tasks (readonly)
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("completedTasksDate").value = today;
+
+    // Pre-fill tomorrow's date for Tasks and Orders
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split("T")[0];
+
+    document.getElementById("tasksForTomorrowDate").value = tomorrowStr;
+    document.getElementById("ordersDate").value = tomorrowStr;
 });
 
 function submitForm() {
-    // Gather the form data
+    // Gather and trim the form data; use "(none)" for empty fields
+    const getValue = (id) => {
+        const val = document.getElementById(id).value.trim();
+        return val === "" ? "(none)" : val.replace(/\n/g, '<br>');
+    };
+
     const formData = {
-        sales: document.getElementById("sales").value,
-        shiftSchedule: document.getElementById("shiftSchedule").value,
+        sales: getValue("sales"),
+        shiftSchedule: getValue("shiftSchedule"),
         completedTasksDate: document.getElementById("completedTasksDate").value,
-        completedTasks: document.getElementById("completedTasks").value,
+        completedTasks: getValue("completedTasks"),
         tasksForTomorrowDate: document.getElementById("tasksForTomorrowDate").value,
-        tasksForTomorrow: document.getElementById("tasksForTomorrow").value,
-        lossReport: document.getElementById("lossReport").value,
-        announcements: document.getElementById("announcements").value,
-        customerFeedback: document.getElementById("customerFeedback").value,
+        tasksForTomorrow: getValue("tasksForTomorrow"),
+        lossReport: getValue("lossReport"),
+        announcements: getValue("announcements"),
+        customerFeedback: getValue("customerFeedback"),
         ordersDate: document.getElementById("ordersDate").value,
-        orders: document.getElementById("orders").value
+        orders: getValue("orders")
     };
     
-    // Format data into a list structure
+    // Format data into a list structure (preserve line breaks with <br>)
     const formattedData = `
         <ol>
             <li><strong>Sales</strong><br>${formData.sales}</li>
@@ -34,34 +48,60 @@ function submitForm() {
         </ol>
     `;
 
-    // Open a new window and display the formatted data
-    const newWindow = window.open("", "_blank", "width=600,height=800");
-    newWindow.document.write(`
-        <html>
-            <head>
-                <title>Daily Report</title>
-                <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-            </head>
-            <body class="bg-light p-4">
-                <div class="container">
-                    <h2>Daily Report</h2>
-                    <div id="reportContent" class="border rounded p-3 bg-white">${formattedData}</div>
-                    <button id="copyButton" class="btn btn-primary mt-3">Copy to Clipboard</button>
-                </div>
-                <script>
-                    // Copy to Clipboard function
-                    document.getElementById("copyButton").onclick = function() {
-                        const reportContent = document.getElementById("reportContent").innerText;
-                        navigator.clipboard.writeText(reportContent).then(function() {
-                            alert("Copied to clipboard!");
-                        }).catch(function(err) {
-                            console.error("Failed to copy: ", err);
-                        });
-                    };
-                </script>
-            </body>
+    // Open preview window
+    const reportWindow = window.open("", "_blank", "width=600,height=800");
+    if (!reportWindow) {
+        alert("Please allow pop-ups to view the report.");
+        return;
+    }
+
+    reportWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>SOT Coffee Shop Daily Report</title>
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body { padding: 20px; }
+                #reportContent ol { padding-left: 20px; }
+            </style>
+        </head>
+        <body class="bg-light">
+            <div class="container">
+                <h2 class="text-center mb-4">SOT Coffee Shop Daily Report</h2>
+                <div id="reportContent" class="border rounded p-4 bg-white mb-4">${formattedData}</div>
+                <button id="copyButton" class="btn btn-success btn-lg btn-block">Copy Formatted Report (for LINE)</button>
+            </div>
+            <script>
+                document.getElementById("copyButton").onclick = async () => {
+                    const content = document.getElementById("reportContent");
+                    try {
+                        // Modern clipboard with HTML (preserves bold in LINE)
+                        if (navigator.clipboard && navigator.clipboard.write) {
+                            const htmlBlob = new Blob([content.innerHTML], { type: "text/html" });
+                            const textBlob = new Blob([content.innerText], { type: "text/plain" });
+                            const item = new ClipboardItem({ "text/html": htmlBlob, "text/plain": textBlob });
+                            await navigator.clipboard.write([item]);
+                        } else {
+                            // Fallback: copy plain text
+                            const range = document.createRange();
+                            range.selectNode(content);
+                            window.getSelection().removeAllRanges();
+                            window.getSelection().addRange(range);
+                            document.execCommand("copy");
+                            window.getSelection().removeAllRanges();
+                        }
+                        alert("Formatted report copied! Ready to paste into LINE.");
+                    } catch (err) {
+                        console.error(err);
+                        alert("Copy failed. Please select the text and copy manually.");
+                    }
+                };
+            </script>
+        </body>
         </html>
     `);
 
-    newWindow.document.close();
+    reportWindow.document.close();
 }
