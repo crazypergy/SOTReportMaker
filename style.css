@@ -1,15 +1,119 @@
+/* style.css - Mobile-first responsive styles with better label spacing */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 100%;
+    padding: 16px;
+    margin: 0 auto;
 }
 
 h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #212529;
+    margin-bottom: 8px;
+}
+
+.lead {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #343a40;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 8px;
+    margin: 40px 0 20px 0;
+}
+
+/* Form groups - vertical stacking with clear separation */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;           /* Space between label and input/textarea */
     color: #343a40;
 }
 
-textarea {
-    resize: vertical;
+.form-control,
+input[type="date"],
+input[type="number"] {
+    display: block;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    box-sizing: border-box;
 }
 
-button {
+/* Numeric keyboard on mobile */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    inputmode: numeric;
+}
+
+/* Buttons */
+.btn {
+    font-size: 1.2rem;
+    padding: 16px;
+    border-radius: 8px;
     font-weight: bold;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:active {
+    transform: translateY(1px);
+}
+
+.btn-outline-secondary {
+    font-size: 1.1rem;
+    padding: 14px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
 }

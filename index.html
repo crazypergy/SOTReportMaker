@@ -1,77 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Report Input</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>SOT Coffee Shop – 日報 / Daily Report</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Daily Report Input</h1>
+    <div class="container">
+        <h1>SOT Coffee Shop</h1>
+        <p class="lead">日報入力 / Daily Report Input</p>
 
         <form id="reportForm">
+            <!-- Sales & Schedule -->
+            <div class="section-title">売上と明日のシフト / Sales & Tomorrow's Schedule</div>
+            
             <div class="form-group">
-                <label for="sales">Sales</label>
-                <textarea id="sales" name="sales" class="form-control" rows="3" placeholder="Enter sales data here..."></textarea>
+                <label for="sales">売上 (円) / Sales (¥)</label>
+                <input type="number" 
+                       id="sales" 
+                       class="form-control" 
+                       min="0" 
+                       step="1" 
+                       placeholder="例: 152000 / e.g. 152000"
+                       required>
+                <small class="form-text text-muted">整数のみ入力してください（日本円）。 / Enter whole numbers only (Japanese yen).</small>
             </div>
 
             <div class="form-group">
-                <label for="shiftSchedule">Shift Schedule for Tomorrow</label>
-                <textarea id="shiftSchedule" name="shiftSchedule" class="form-control" rows="3" placeholder="Enter shift schedule here..."></textarea>
+                <label for="shiftSchedule">明日のシフト予定 / Shift Schedule for Tomorrow</label>
+                <textarea id="shiftSchedule" class="form-control" rows="4" placeholder="スタッフとシフトを記載... / List staff and shifts..."></textarea>
+            </div>
+
+            <!-- Tasks -->
+            <div class="section-title">タスク / Tasks</div>
+            
+            <div class="form-group">
+                <label for="completedTasksDate">完了タスクの日付 / Completed Tasks Date</label>
+                <input type="date" id="completedTasksDate" class="form-control" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="completedTasks">完了したタスク / Completed Tasks</label>
+                <textarea id="completedTasks" class="form-control" rows="4" placeholder="本日完了した内容... / What was completed today?"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="completedTasksDate">Completed Tasks Date</label>
-                <input type="date" id="completedTasksDate" name="completedTasksDate" class="form-control" readonly>
+                <label for="tasksForTomorrowDate">タスク予定日 / Tasks for Date</label>
+                <input type="date" id="tasksForTomorrowDate" class="form-control">
             </div>
+            
             <div class="form-group">
-                <label for="completedTasks">Completed Tasks</label>
-                <textarea id="completedTasks" name="completedTasks" class="form-control" rows="3" placeholder="Enter completed tasks here..."></textarea>
+                <label for="tasksForTomorrow">明日のタスク / Tasks for Tomorrow</label>
+                <textarea id="tasksForTomorrow" class="form-control" rows="4" placeholder="明日行うタスク... / Tasks to do tomorrow..."></textarea>
             </div>
 
+            <!-- Reports -->
+            <div class="section-title">報告 / Reports</div>
+            
             <div class="form-group">
-                <label for="tasksForTomorrowDate">Tasks for Date</label>
-                <input type="date" id="tasksForTomorrowDate" name="tasksForTomorrowDate" class="form-control">
+                <label for="lossReport">ロス報告 / Loss Report</label>
+                <textarea id="lossReport" class="form-control" rows="3" placeholder="ロスや問題があれば記載... / Any losses or issues..."></textarea>
             </div>
+            
             <div class="form-group">
-                <label for="tasksForTomorrow">Tasks</label>
-                <textarea id="tasksForTomorrow" name="tasksForTomorrow" class="form-control" rows="3" placeholder="Enter tasks for tomorrow here..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="lossReport">Loss Report</label>
-                <textarea id="lossReport" name="lossReport" class="form-control" rows="3" placeholder="Enter loss report here..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="announcements">Announcements</label>
-                <textarea id="announcements" name="announcements" class="form-control" rows="3" placeholder="Enter announcements here..."></textarea>
+                <label for="announcements">お知らせ / Announcements</label>
+                <textarea id="announcements" class="form-control" rows="3" placeholder="重要なお知らせ... / Important announcements..."></textarea>
             </div>
 
+            <!-- Orders -->
+            <div class="section-title">発注 / Orders</div>
+            
             <div class="form-group">
-                <label for="customerFeedback">Customer Feedback & Observations</label>
-                <textarea id="customerFeedback" name="customerFeedback" class="form-control" rows="3" placeholder="Enter customer feedback here..."></textarea>
+                <label for="ordersDate">発注予定日 / Orders for Date</label>
+                <input type="date" id="ordersDate" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="orders">発注内容 / Orders</label>
+                <textarea id="orders" class="form-control" rows="4" placeholder="発注する商品... / Items to order..."></textarea>
             </div>
 
+            <!-- Customer Feedback -->
             <div class="form-group">
-                <label for="ordersDate">Orders for Date</label>
-                <input type="date" id="ordersDate" name="ordersDate" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="orders">Orders</label>
-                <textarea id="orders" name="orders" class="form-control" rows="3" placeholder="Enter orders here..."></textarea>
+                <label for="customerFeedback">お客様の声・観察事項 / Customer Feedback & Observations</label>
+                <textarea id="customerFeedback" class="form-control" rows="4" placeholder="お客様のコメントや気づいたこと... / Customer comments, observations..."></textarea>
             </div>
 
-            <!-- Button to generate the report in a new window -->
-            <button type="button" onclick="submitForm()" class="btn btn-primary btn-block">Generate Report</button>
+            <!-- Action Buttons -->
+            <button type="button" onclick="submitForm()" class="btn btn-success">
+                レポート生成（LINE用） / Generate Report (Ready for LINE)
+            </button>
+
+            <button type="button" onclick="clearForm()" class="btn btn-outline-secondary">
+                フォームをクリア / Clear Form
+            </button>
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
