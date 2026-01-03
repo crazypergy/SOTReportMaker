@@ -1,53 +1,59 @@
-/* style.css - Mobile-first responsive styles with better label spacing */
+/* style.css - Inspired by SOT Coffee Roaster (www.sotcoffee.com) */
+/* Minimalist, warm, Japanese delicacy with Nordic simplicity */
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: #f8f9fa;
+    font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", sans-serif;
+    background-color: #f9f5f0;  /* Warm off-white, coffee-inspired */
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: #444;
 }
 
 .container {
     max-width: 100%;
-    padding: 16px;
+    padding: 24px;
     margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
-    color: #212529;
+    color: #8b4513;  /* Warm coffee brown */
     margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .lead {
     text-align: center;
-    color: #6c757d;
-    margin-bottom: 32px;
-    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
 }
 
 .section-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #343a40;
-    border-bottom: 2px solid #dee2e6;
-    padding-bottom: 8px;
-    margin: 40px 0 20px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #8b4513;
+    border-bottom: 2px solid #e6d8c8;
+    padding-bottom: 10px;
+    margin: 48px 0 24px 0;
 }
 
-/* Form groups - vertical stacking with clear separation */
+/* Form groups */
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .form-group label {
     display: block;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 8px;           /* Space between label and input/textarea */
-    color: #343a40;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: #555;
 }
 
 .form-control,
@@ -55,65 +61,80 @@ input[type="date"],
 input[type="number"] {
     display: block;
     width: 100%;
-    font-size: 1.1rem;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ced4da;
+    font-size: 1.15rem;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
     box-sizing: border-box;
 }
 
-/* Numeric keyboard on mobile */
-input[type="number"] {
-    -moz-appearance: textfield;
+/* Shift add section */
+.shift-add {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 1.15rem;
+    color: #555;
 }
 
-input[type="number"] {
-    inputmode: numeric;
+.checkbox-label input {
+    margin-right: 10px;
 }
 
-/* Buttons */
+/* Buttons - Warm coffee tones */
 .btn {
-    font-size: 1.2rem;
-    padding: 16px;
-    border-radius: 8px;
-    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 600;
     width: 100%;
-    margin-top: 16px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 .btn-success {
-    background-color: #28a745;
+    background-color: #8b4513;
     border: none;
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    color: white;
+    box-shadow: 0 6px 16px rgba(139,69,19,0.3);
 }
 
 .btn-success:active {
-    transform: translateY(1px);
+    transform: translateY(2px);
+}
+
+.btn-primary {
+    background-color: #a5693a;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 12px rgba(165,105,58,0.3);
 }
 
 .btn-outline-secondary {
-    font-size: 1.1rem;
-    padding: 14px;
+    border: 2px solid #ccc;
+    background: transparent;
+    color: #666;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (min-width: 576px) {
     .container {
-        max-width: 540px;
+        max-width: 560px;
     }
     h1 {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
     }
 }
 
 @media (min-width: 768px) {
     .container {
-        max-width: 720px;
+        max-width: 740px;
     }
 }

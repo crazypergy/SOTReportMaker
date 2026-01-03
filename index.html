@@ -30,6 +30,20 @@
 
             <div class="form-group">
                 <label for="shiftSchedule">明日のシフト予定 / Shift Schedule for Tomorrow</label>
+                <div class="shift-add">
+                    <input type="text" id="shiftName" class="form-control" placeholder="名前 / Name">
+                    <select id="shiftType" class="form-control">
+                        <option value="早/Early">早/Early</option>
+                        <option value="中/Middle">中/Middle</option>
+                        <option value="遅/Late">遅/Late</option>
+                        <option value="Custom">カスタム / Custom</option>
+                    </select>
+                    <input type="text" id="shiftCustom" class="form-control" placeholder="カスタムシフト / Custom shift" style="display: none;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="shiftTraining"> トレ/Training
+                    </label>
+                    <button type="button" onclick="addShift()" class="btn btn-primary">シフト追加 / Add Shift</button>
+                </div>
                 <textarea id="shiftSchedule" class="form-control" rows="4" placeholder="スタッフとシフトを記載... / List staff and shifts..."></textarea>
             </div>
 
