@@ -138,3 +138,70 @@ input[type="number"] {
         max-width: 740px;
     }
 }
+
+/* Product counts section */
+.product-counts {
+    display: grid;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.product-item span {
+    font-weight: 600;
+    color: #555;
+    min-width: 180px;
+}
+
+.product-item input {
+    width: 100px;
+    text-align: center;
+}
+
+/* Roasting dates section */
+.roasting-dates {
+    display: grid;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.roasting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.roasting-item span {
+    font-weight: 600;
+    color: #555;
+    min-width: 120px;
+}
+
+.roasting-item input {
+    width: 200px;
+}
+
+/* Special coffees section */
+.special-coffees {
+    display: grid;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.special-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.special-item span {
+    font-weight: 600;
+    color: #555;
+}

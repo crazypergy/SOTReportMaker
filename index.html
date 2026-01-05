@@ -29,6 +29,22 @@
             </div>
 
             <div class="form-group">
+                <label for="salesDiscrepancyAmount">売上差額 (円) / Sales Discrepancy (¥)</label>
+                <input type="number" 
+                       id="salesDiscrepancyAmount" 
+                       class="form-control" 
+                       step="1" 
+                       value="0"
+                       placeholder="例: -5000 / e.g. -5000 or +3000">
+                <small class="form-text text-muted">実際と予想の差額。マイナス可。デフォルト0 / Difference from expected. Negative allowed. Default 0.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="salesDiscrepancyNote">差額の理由・メモ / Discrepancy Reason/Note</label>
+                <textarea id="salesDiscrepancyNote" class="form-control" rows="3" placeholder="差額が発生した理由を記載... / Explain the reason for discrepancy..."></textarea>
+            </div>
+
+            <div class="form-group">
                 <label for="shiftSchedule">明日のシフト予定 / Shift Schedule for Tomorrow</label>
                 <div class="shift-add">
                     <input type="text" id="shiftName" class="form-control" placeholder="名前 / Name">
@@ -47,12 +63,31 @@
                 <textarea id="shiftSchedule" class="form-control" rows="4" placeholder="スタッフとシフトを記載... / List staff and shifts..."></textarea>
             </div>
 
-            <!-- Tasks -->
-            <div class="section-title">タスク / Tasks</div>
+            <!-- Tasks (now includes product counts) -->
+            <div class="section-title">タスクと生産数 / Tasks & Production Count</div>
             
             <div class="form-group">
                 <label for="completedTasksDate">完了タスクの日付 / Completed Tasks Date</label>
                 <input type="date" id="completedTasksDate" class="form-control" readonly>
+            </div>
+
+            <!-- Product counts -->
+            <div class="form-group">
+                <label>生産数 / Production Count</label>
+                <div class="product-counts">
+                    <div class="product-item">
+                        <span>プレーンチーズケーキ / Plain Cheesecake</span>
+                        <input type="number" id="plainCheesecake" class="form-control" min="0" step="1" value="0">
+                    </div>
+                    <div class="product-item">
+                        <span>季節のチーズケーキ / Seasonal Cheesecake</span>
+                        <input type="number" id="seasonalCheesecake" class="form-control" min="0" step="1" value="0">
+                    </div>
+                    <div class="product-item">
+                        <span>ヌガーバー / Nougat Bar</span>
+                        <input type="number" id="nougatBar" class="form-control" min="0" step="1" value="0">
+                    </div>
+                </div>
             </div>
             
             <div class="form-group">
@@ -70,18 +105,55 @@
                 <textarea id="tasksForTomorrow" class="form-control" rows="4" placeholder="明日行うタスク... / Tasks to do tomorrow..."></textarea>
             </div>
 
-            <!-- Reports -->
-            <div class="section-title">報告 / Reports</div>
-            
-            <div class="form-group">
-                <label for="lossReport">ロス報告 / Loss Report</label>
-                <textarea id="lossReport" class="form-control" rows="3" placeholder="ロスや問題があれば記載... / Any losses or issues..."></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="announcements">お知らせ / Announcements</label>
-                <textarea id="announcements" class="form-control" rows="3" placeholder="重要なお知らせ... / Important announcements..."></textarea>
-            </div>
+           <!-- Reports -->
+<div class="section-title">報告 / Reports</div>
+
+<!-- Roasting Dates -->
+<div class="form-group">
+    <label>焙煎日 / Roasting Date</label>
+    <div class="roasting-dates">
+        <div class="roasting-item">
+            <span>Latte Brazil</span>
+            <input type="date" id="roastLatteBrazil" class="form-control">
+        </div>
+        <div class="roasting-item">
+            <span>ESP</span>
+            <input type="date" id="roastESP" class="form-control">
+        </div>
+    </div>
+</div>
+<!-- Special Coffees Notes -->
+<div class="form-group">
+    <label>特別コーヒー・メモ / Special Coffees Notes</label>
+    <div class="special-coffees">
+        <div class="special-item">
+            <span>Special Latte</span>
+            <textarea id="specialLatte" class="form-control" rows="2" placeholder="Special Latteに関するメモ..."></textarea>
+        </div>
+        <div class="special-item">
+            <span>Light Americano</span>
+            <textarea id="lightAmericano" class="form-control" rows="2" placeholder="Light Americanoに関するメモ..."></textarea>
+        </div>
+        <div class="special-item">
+            <span>Today's Coffee</span>
+            <textarea id="todaysCoffee" class="form-control" rows="2" placeholder="Today's Coffeeに関するメモ..."></textarea>
+        </div>
+        <div class="special-item">
+            <span>Decaf</span>
+            <textarea id="decaf" class="form-control" rows="2" placeholder="Decafに関するメモ..."></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="lossReport">ロス報告 / Loss Report</label>
+    <textarea id="lossReport" class="form-control" rows="3" placeholder="ロスや問題があれば記載... / Any losses or issues..."></textarea>
+</div>
+
+<div class="form-group">
+    <label for="announcements">お知らせ / Announcements</label>
+    <textarea id="announcements" class="form-control" rows="3" placeholder="重要なお知らせ... / Important announcements..."></textarea>
+</div>
 
             <!-- Orders -->
             <div class="section-title">発注 / Orders</div>
