@@ -1,5 +1,11 @@
-// script.js - Complete SOT Coffee Shop Daily Report Generator
-// Features: Shift adder, Sales discrepancy, Production counts, Roasting dates (month/day), Special coffees notes
+// script.js - Fixed: getTextareaValue moved to correct scope
+
+// Helper function - defined at the top so it's available everywhere
+function getTextareaValue(id) {
+    const raw = document.getElementById(id).value;
+    const trimmed = raw.trim();
+    return trimmed === "" ? "(none)" : trimmed.replace(/\n/g, '<br>');
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     // Auto-fill today's date (readonly)
@@ -11,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowStr = tomorrow.toISOString().split("T")[0];
     document.getElementById("tasksForTomorrowDate").value = tomorrowStr;
-    document.getElementById("ordersDate").value = tomorrowStr;
 
     // Show/hide custom shift input
     document.getElementById("shiftType").addEventListener("change", function() {
@@ -50,12 +55,6 @@ function addShift() {
 
 // Generate the formatted report
 function submitForm() {
-    const getTextareaValue = (id) => {
-        const raw = document.getElementById(id).value;
-        const trimmed = raw.trim();
-        return trimmed === "" ? "(none)" : trimmed.replace(/\n/g, '<br>');
-    };
-
     // Sales with discrepancy
     const salesValue = document.getElementById("sales").value.trim();
     const salesNum = salesValue === "" ? 0 : parseInt(salesValue, 10);
@@ -94,39 +93,37 @@ function submitForm() {
     const roastLatteBrazil = document.getElementById("roastLatteBrazil").value;
     const roastESP = document.getElementById("roastESP").value;
 
-   let roastingLine = "";
-if (roastLatteBrazil || roastESP) {
-    roastingLine = `<strong>焙煎日 / Roasting Dates:</strong><br>`;
-    if (roastLatteBrazil) {
-        const lbDate = new Date(roastLatteBrazil);
-        const lbMonth = lbDate.getMonth() + 1;
-        const lbDay = lbDate.getDate();
-        roastingLine += `・Latte Brazil: ${lbMonth}月${lbDay}日<br>`;
+    let roastingLine = "";
+    if (roastLatteBrazil || roastESP) {
+        roastingLine = `<strong>焙煎日 / Roasting Dates:</strong><br>`;
+        if (roastLatteBrazil) {
+            const lbDate = new Date(roastLatteBrazil);
+            const lbMonth = lbDate.getMonth() + 1;
+            const lbDay = lbDate.getDate();
+            roastingLine += `・Latte Brazil: ${lbMonth}月${lbDay}日<br>`;
+        }
+        if (roastESP) {
+            const espDate = new Date(roastESP);
+            const espMonth = espDate.getMonth() + 1;
+            const espDay = espDate.getDate();
+            roastingLine += `・ESP: ${espMonth}月${espDay}日<br>`;
+        }
+        roastingLine += "<br>";
     }
-    if (roastESP) {
-        const espDate = new Date(roastESP);
-        const espMonth = espDate.getMonth() + 1;
-        const espDay = espDate.getDate();
-        roastingLine += `・ESP: ${espMonth}月${espDay}日<br>`;
-    }
-    roastingLine += "<br>";
-}
 
     // Special coffees notes
     const specialLatte = getTextareaValue("specialLatte");
     const lightAmericano = getTextareaValue("lightAmericano");
-    const todaysCoffee = getTextareaValue("todaysCoffee");
     const decaf = getTextareaValue("decaf");
 
     let specialCoffeesLine = "";
-if (specialLatte !== "(none)" || lightAmericano !== "(none)" || todaysCoffee !== "(none)" || decaf !== "(none)") {
-    specialCoffeesLine = `<strong>特別コーヒー / Special Coffees:</strong><br>`;
-    if (specialLatte !== "(none)") specialCoffeesLine += `・Special Latte: ${specialLatte}<br>`;
-    if (lightAmericano !== "(none)") specialCoffeesLine += `・Light Americano: ${lightAmericano}<br>`;
-    if (todaysCoffee !== "(none)") specialCoffeesLine += `・Today's Coffee: ${todaysCoffee}<br>`;
-    if (decaf !== "(none)") specialCoffeesLine += `・Decaf: ${decaf}<br>`;
-    specialCoffeesLine += "<br>";
-}
+    if (specialLatte !== "(none)" || lightAmericano !== "(none)" || decaf !== "(none)") {
+        specialCoffeesLine = `<strong>特別コーヒー / Special Coffees:</strong><br>`;
+        if (specialLatte !== "(none)") specialCoffeesLine += `・Special Latte: ${specialLatte}<br>`;
+        if (lightAmericano !== "(none)") specialCoffeesLine += `・Light Americano: ${lightAmericano}<br>`;
+        if (decaf !== "(none)") specialCoffeesLine += `・Decaf: ${decaf}<br>`;
+        specialCoffeesLine += "<br>";
+    }
 
     const formData = {
         sales: salesLine,
@@ -140,12 +137,10 @@ if (specialLatte !== "(none)" || lightAmericano !== "(none)" || todaysCoffee !==
         tasksForTomorrow: getTextareaValue("tasksForTomorrow"),
         lossReport: getTextareaValue("lossReport"),
         announcements: getTextareaValue("announcements"),
-        customerFeedback: getTextareaValue("customerFeedback"),
-        ordersDate: document.getElementById("ordersDate").value,
-        orders: getTextareaValue("orders")
+        customerFeedback: getTextareaValue("customerFeedback")
     };
 
-    // Japanese date header (e.g., 1月5日　月曜日)
+    // Japanese date header
     const dateObj = new Date(formData.completedTasksDate);
     const month = dateObj.getMonth() + 1;
     const day = dateObj.getDate();
@@ -153,23 +148,22 @@ if (specialLatte !== "(none)" || lightAmericano !== "(none)" || todaysCoffee !==
     const weekday = weekdays[dateObj.getDay()];
     const japaneseDate = `${month}月${day}日　${weekday}`;
 
-   const formattedData = `
-    <div style="text-align: center; font-size: 1.4rem; font-weight: bold; color: #8b4513; margin-bottom: 32px;">
-        ${japaneseDate}
-    </div>
-    <ol style="padding-left: 20px; margin: 0; line-height: 2.2;">
-        <li><strong>売上 / Sales</strong><br>${formData.sales}<br><br></li>
-        <li><strong>明日のシフト予定 / Shift Schedule for Tomorrow</strong><br>${formData.shiftSchedule}<br><br></li>
-        <li><strong>生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
-        <li><strong>${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}</strong><br>${formData.tasksForTomorrow}<br><br></li>
-        <li><strong>ロス報告 / Loss Report</strong><br>${formData.lossReport}<br><br></li>
-        ${roastingLine ? `<li>${roastingLine}</li>` : ''}
-        ${specialCoffeesLine ? `<li>${specialCoffeesLine}</li>` : ''}
-        <li><strong>お知らせ / Announcements</strong><br>${formData.announcements}<br><br></li>
-        <li><strong>お客様の声・観察事項 / Customer Feedback & Observations</strong><br>${formData.customerFeedback}<br><br></li>
-        <li><strong>${formData.ordersDate}の発注 / Orders for ${formData.ordersDate}</strong><br>${formData.orders}</li>
-    </ol>
-`;
+    const formattedData = `
+        <div style="text-align: center; font-size: 1.4rem; font-weight: bold; color: #8b4513; margin-bottom: 32px;">
+            ${japaneseDate}
+        </div>
+        <ol style="padding-left: 20px; margin: 0; line-height: 2.2;">
+            <li><strong>売上 / Sales</strong><br>${formData.sales}<br><br></li>
+            <li><strong>明日のシフト予定 / Shift Schedule for Tomorrow</strong><br>${formData.shiftSchedule}<br><br></li>
+            <li><strong>生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
+            <li><strong>${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}</strong><br>${formData.tasksForTomorrow}<br><br></li>
+            <li><strong>ロス報告 / Loss Report</strong><br>${formData.lossReport}<br><br></li>
+            ${formData.roasting ? `<li>${formData.roasting}</li>` : ''}
+            ${formData.specialCoffees ? `<li>${formData.specialCoffees}</li>` : ''}
+            <li><strong>お知らせ / Announcements</strong><br>${formData.announcements}<br><br></li>
+            <li><strong>お客様の声・観察事項 / Customer Feedback & Observations</strong><br>${formData.customerFeedback}<br><br></li>
+        </ol>
+    `;
 
     const reportWindow = window.open("", "_blank", "width=600,height=800");
     if (!reportWindow) {
@@ -242,22 +236,17 @@ function clearForm() {
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowStr = tomorrow.toISOString().split("T")[0];
     document.getElementById("tasksForTomorrowDate").value = tomorrowStr;
-    document.getElementById("ordersDate").value = tomorrowStr;
 
-    // Reset numeric defaults
     document.getElementById("salesDiscrepancyAmount").value = "0";
     document.getElementById("plainCheesecake").value = "0";
     document.getElementById("seasonalCheesecake").value = "0";
     document.getElementById("nougatBar").value = "0";
 
-    // Clear roasting and special coffees
     document.getElementById("roastLatteBrazil").value = "";
     document.getElementById("roastESP").value = "";
     document.getElementById("specialLatte").value = "";
     document.getElementById("lightAmericano").value = "";
-    document.getElementById("todaysCoffee").value = "";
     document.getElementById("decaf").value = "";
 
-    // Return focus to sales
     document.getElementById("sales").focus();
 }
