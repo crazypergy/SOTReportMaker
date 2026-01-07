@@ -153,15 +153,15 @@ function submitForm() {
             ${japaneseDate}
         </div>
         <ol style="padding-left: 20px; margin: 0; line-height: 2.2;">
-            <li><strong>*売上 / Sales*</strong><br>${formData.sales}<br><br></li>
-            <li><strong>明日のシフト予定 / Shift Schedule for Tomorrow</strong><br>${formData.shiftSchedule}<br><br></li>
-            <li><strong>生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
-            <li><strong>${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}</strong><br>${formData.tasksForTomorrow}<br><br></li>
-            <li><strong>ロス報告 / Loss Report</strong><br>${formData.lossReport}<br><br></li>
+            <li><strong>[売上 / Sales</strong>]<br>${formData.sales}<br><br></li>
+            <li><strong>[明日のシフト予定 / Shift Schedule for Tomorrow]</strong><br>${formData.shiftSchedule}<br><br></li>
+            <li><strong>[生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks]</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
+            <li><strong>[${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}]</strong><br>${formData.tasksForTomorrow}<br><br></li>
+            <li><strong>[ロス報告 / Loss Report]</strong><br>${formData.lossReport}<br><br></li>
             ${formData.roasting ? `<li>${formData.roasting}</li>` : ''}
             ${formData.specialCoffees ? `<li>${formData.specialCoffees}</li>` : ''}
-            <li><strong>お知らせ / Announcements</strong><br>${formData.announcements}<br><br></li>
-            <li><strong>お客様の声・観察事項 / Customer Feedback & Observations</strong><br>${formData.customerFeedback}<br><br></li>
+            <li><strong>[お知らせ / Announcements]</strong><br>${formData.announcements}<br><br></li>
+            <li><strong>[お客様の声・観察事項 / Customer Feedback & Observations]</strong><br>${formData.customerFeedback}<br><br></li>
         </ol>
     `;
 
