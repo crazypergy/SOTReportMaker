@@ -74,15 +74,15 @@ function submitForm() {
     }
 
     // Product production counts
-    const plain = parseInt(document.getElementById("plainCheesecake").value) || 0;
-    const seasonal = parseInt(document.getElementById("seasonalCheesecake").value) || 0;
+    const plain = parseFloat(document.getElementById("plainCheesecake").value) || 0;
+    const seasonal = parseFloat(document.getElementById("seasonalCheesecake").value) || 0;
     const nougat = parseInt(document.getElementById("nougatBar").value) || 0;
 
     let productionLine = "";
     if (plain > 0 || seasonal > 0 || nougat > 0) {
         productionLine = `<strong>生産数 / Production:</strong><br>`;
-        if (plain > 0) productionLine += `・プレーンチーズケーキ / Plain Cheesecake: ${plain}個<br>`;
-        if (seasonal > 0) productionLine += `・季節のチーズケーキ / Seasonal Cheesecake: ${seasonal}個<br>`;
+        if (plain > 0) productionLine += `・プレーンチーズケーキ / Plain Cheesecake: ${plain}ホール<br>`;
+        if (seasonal > 0) productionLine += `・季節のチーズケーキ / Seasonal Cheesecake: ${seasonal}ホール<br>`;
         if (nougat > 0) productionLine += `・ヌガーバー / Nougat Bar: ${nougat}個<br>`;
         productionLine += "<br>";
     } else {
@@ -148,20 +148,26 @@ function submitForm() {
     const weekday = weekdays[dateObj.getDay()];
     const japaneseDate = `${month}月${day}日　${weekday}`;
 
+    //Japanese Tomorrow's Date
+    const tomorrowDateObj = new Date(formData.tasksForTomorrowDate);
+    const tomorrowMonth = tomorrowDateObj.getMonth() + 1;
+    const tomorrowDay = tomorrowDateObj.getDate();
+    formData.tasksForTomorrowDate = `${tomorrowMonth}月${tomorrowDay}日`;
+
     const formattedData = `
         <div style="text-align: center; font-size: 1.4rem; font-weight: bold; color: #8b4513; margin-bottom: 32px;">
             ${japaneseDate}
         </div>
         <ol style="padding-left: 20px; margin: 0; line-height: 2.2;">
-            <li><strong>売上 / Sales</strong><br>${formData.sales}<br><br></li>
-            <li><strong>明日のシフト予定 / Shift Schedule for Tomorrow</strong><br>${formData.shiftSchedule}<br><br></li>
-            <li><strong>生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
-            <li><strong>${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}</strong><br>${formData.tasksForTomorrow}<br><br></li>
-            <li><strong>ロス報告 / Loss Report</strong><br>${formData.lossReport}<br><br></li>
+            <li><strong>[売上 / Sales</strong>]<br>${formData.sales}<br><br></li>
+            <li><strong>[明日のシフト予定 / Shift Schedule for Tomorrow]</strong><br>${formData.shiftSchedule}<br><br></li>
+            <li><strong>[生産・完了タスク / Production & Completed Tasks]</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
+            <li><strong>[${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}]</strong><br>${formData.tasksForTomorrow}<br><br></li>
+            <li><strong>[ロス報告 / Loss Report]</strong><br>${formData.lossReport}<br><br></li>
             ${formData.roasting ? `<li>${formData.roasting}</li>` : ''}
             ${formData.specialCoffees ? `<li>${formData.specialCoffees}</li>` : ''}
-            <li><strong>お知らせ / Announcements</strong><br>${formData.announcements}<br><br></li>
-            <li><strong>お客様の声・観察事項 / Customer Feedback & Observations</strong><br>${formData.customerFeedback}<br><br></li>
+            <li><strong>[お知らせ / Announcements</strong><br>${formData.announcements}]<br><br></li>
+            <li><strong>[お客様の声・観察事項 / Customer Feedback & Observations]</strong><br>${formData.customerFeedback}<br><br></li>
         </ol>
     `;
 
