@@ -153,7 +153,7 @@ function submitForm() {
             ${japaneseDate}
         </div>
         <ol style="padding-left: 20px; margin: 0; line-height: 2.2;">
-            <li><strong>売上 / Sales</strong><br>${formData.sales}<br><br></li>
+            <li><strong>*売上 / Sales*</strong><br>${formData.sales}<br><br></li>
             <li><strong>明日のシフト予定 / Shift Schedule for Tomorrow</strong><br>${formData.shiftSchedule}<br><br></li>
             <li><strong>生産・完了タスク (${formData.completedTasksDate}) / Production & Completed Tasks</strong><br>${formData.production}${formData.completedTasks}<br><br></li>
             <li><strong>${formData.tasksForTomorrowDate}のタスク / Tasks for ${formData.tasksForTomorrowDate}</strong><br>${formData.tasksForTomorrow}<br><br></li>
