@@ -95,7 +95,7 @@ function submitForm() {
 
     let roastingLine = "";
     if (roastLatteBrazil || roastESP) {
-        roastingLine = `<strong>焙煎日 / Roasting Dates:</strong><br>`;
+        roastingLine = `<strong>[焙煎日 / Roasting Dates:</strong>]<br>`;
         if (roastLatteBrazil) {
             const lbDate = new Date(roastLatteBrazil);
             const lbMonth = lbDate.getMonth() + 1;
@@ -118,7 +118,7 @@ function submitForm() {
 
     let specialCoffeesLine = "";
     if (specialLatte !== "(none)" || lightAmericano !== "(none)" || decaf !== "(none)") {
-        specialCoffeesLine = `<strong>特別コーヒー / Special Coffees:</strong><br>`;
+        specialCoffeesLine = `<strong>[特別コーヒー / Special Coffees:</strong>]<br>`;
         if (specialLatte !== "(none)") specialCoffeesLine += `・Special Latte: ${specialLatte}<br>`;
         if (lightAmericano !== "(none)") specialCoffeesLine += `・Light Americano: ${lightAmericano}<br>`;
         if (decaf !== "(none)") specialCoffeesLine += `・Decaf: ${decaf}<br>`;
@@ -166,7 +166,7 @@ function submitForm() {
             <li><strong>[ロス報告 / Loss Report]</strong><br>${formData.lossReport}<br><br></li>
             ${formData.roasting ? `<li>${formData.roasting}</li>` : ''}
             ${formData.specialCoffees ? `<li>${formData.specialCoffees}</li>` : ''}
-            <li><strong>[お知らせ / Announcements</strong><br>${formData.announcements}]<br><br></li>
+            <li><strong>[お知らせ / Announcements]</strong><br>${formData.announcements}<br><br></li>
             <li><strong>[お客様の声・観察事項 / Customer Feedback & Observations]</strong><br>${formData.customerFeedback}<br><br></li>
         </ol>
     `;
